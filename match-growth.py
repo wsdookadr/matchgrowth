@@ -6,7 +6,7 @@ from matchgrowth import *
 
 def valid_file(inputfile):
     if not os.path.isfile(inputfile):
-        raise argparse.ArgumentTypeError('mysql dump file does not exist')
+        raise argparse.ArgumentTypeError('CSV input file does not exist')
     return inputfile
 
 arg_parser = argparse.ArgumentParser(description='Tool for estimating growth rates')
