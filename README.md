@@ -42,8 +42,6 @@ If the `--outfile` parameter is not passed, the default GUI from matplotlib will
       --col2 COL2        data column 2 from the CSV
       --top TOP          only print top N closest growth rates
 
-
-
 Example usage:
 
     match-growth.py --infile ./tests/modif7_bench.txt --outfile r1.png --col1 N --col2 memory --top 2

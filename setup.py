@@ -15,9 +15,9 @@ setuptools.setup(
     packages=setuptools.find_packages(),
     scripts=["match-growth.py"],
     install_requires=[
-          'numpy>=',
-          'scipy>=',
-          'matplotlib>=',
+          'numpy>=1.19.4',
+          'scipy>=1.5.4',
+          'matplotlib>=3.3.3',
           'sympy>=1.7.1',
     ],
     extras_require={
