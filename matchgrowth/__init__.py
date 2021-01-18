@@ -1,5 +1,6 @@
 import numpy as np
 import sympy as sp
+import warnings
 import csv
 import matplotlib.pyplot as plt
 from scipy.optimize import curve_fit
@@ -73,7 +74,9 @@ def prepare_func(catalog_key,catalog=default_catalog):
 def fit_func(catalog_key,catalog,X,Y):
     f_to_fit = prepare_func(catalog_key)
     maxfev = 4 * (10**4)
-    popt, pcov = curve_fit(f_to_fit["py_func"], X,Y, maxfev=maxfev)
+    with warnings.catch_warnings():
+        warnings.simplefilter("ignore")
+        popt, pcov = curve_fit(f_to_fit["py_func"], X,Y, maxfev=maxfev)
     args_ = f_to_fit["args"]
     args_.pop(0)
     subs_arg = dict(list(zip(args_,popt)))
@@ -88,6 +91,7 @@ def fit_func(catalog_key,catalog,X,Y):
 
 def match_catalog(X,Y,catalog=default_catalog):
     plot_data_arr = []
+
     for elem_catalog in catalog:
         try:
             catalog_label = elem_catalog["kind"]
@@ -105,6 +109,7 @@ def match_catalog(X,Y,catalog=default_catalog):
             })
         except RuntimeError as e:
             continue
+
     if len(plot_data_arr)==0:
         return plot_data_arr
     else:
@@ -126,18 +131,32 @@ def read_columns_csv(filepath,col1,col2):
 
         return X,Y
 
-def run_from_file(filepath,col1,col2,catalog=default_catalog):
-    D_x,D_y = read_columns_csv(filepath,col1,col2)
+def compute_max_residuals(X,Y):
+    total_data_area = abs(max(X)-min(X)) * abs(max(Y)-min(Y))
+    max_percent = 0.02
+    return total_data_area * max_percent
 
-    plt.figure(figsize=(13,13))
-    plot_data = match_catalog(D_x,D_y,catalog)
-    plt.plot(D_x,D_y,label="recorded_data")
+def run_from_file(infile,col1,col2,catalog=default_catalog,outfile=None):
+    X,Y = read_columns_csv(infile,col1,col2)
+
+    float_formatter = "{:.2f}".format
+    np.set_printoptions(formatter={'float_kind':float_formatter})
+
+    plt.figure(figsize=(10,10))
+    plot_data = match_catalog(X,Y,catalog)
+    plt.plot(X,Y,label="recorded_data")
+    max_residuals = compute_max_residuals(X,Y)
     for pd in plot_data:
-        if pd["sum_residuals"] > 100000: continue
-        # print(pd["catalog_label"],pd["sum_residuals"],pd["popt"])
+        if pd["sum_residuals"] > max_residuals: continue
         if pd["F[X]"] is np.nan: continue
         plt.plot(pd["X"],pd["F[X]"],label=pd["catalog_label"])
+        print(pd["catalog_label"],pd["sum_residuals"],pd["popt"])
     plt.grid(True, ls="-")
-    plt.legend(bbox_to_anchor=(1.05, 1), loc='upper left', borderaxespad=0.)
-    plt.show()
+    plt.legend(bbox_to_anchor=(0,0), loc='upper left', borderaxespad=0.)
+
+    if outfile is None:
+        plt.show()
+    else:
+        plt.savefig(outfile)
+
 
