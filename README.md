@@ -45,6 +45,9 @@ Example usage:
 
     match-growth.py --infile ./tests/modif7_bench.txt --outfile r1.png --col1 N --col2 memory --top 2
 
+In this example we're estimating the closest growth rate for an algorithm that has a single input `N` and for which we've
+already recorded the memory usage for different values of `N`.
+
 <img src="https://raw.githubusercontent.com/wsdookadr/matchgrowth/master/example.png" alt="drawing" style="width:200px;"/>
 
 Support
