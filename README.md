@@ -46,7 +46,7 @@ Example usage:
 
     match-growth.py --infile ./tests/modif7_bench.txt --outfile r1.png --col1 N --col2 memory --top 2
 
-![](./example.png =150x)
+<img src="example.png" alt="drawing" style="width:200px;"/>
 
 Support
 ==================
