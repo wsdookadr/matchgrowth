@@ -136,7 +136,7 @@ def compute_max_residuals(X,Y):
     max_percent = 0.02
     return total_data_area * max_percent
 
-def run_from_file(infile,col1,col2,catalog=default_catalog,outfile=None):
+def run_from_file(infile,col1,col2,catalog=default_catalog,outfile=None,top=None):
     X,Y = read_columns_csv(infile,col1,col2)
 
     float_formatter = "{:.2f}".format
@@ -146,11 +146,16 @@ def run_from_file(infile,col1,col2,catalog=default_catalog,outfile=None):
     plot_data = match_catalog(X,Y,catalog)
     plt.plot(X,Y,label="recorded_data")
     max_residuals = compute_max_residuals(X,Y)
+
+    cnt = 1
     for pd in plot_data:
         if pd["sum_residuals"] > max_residuals: continue
         if pd["F[X]"] is np.nan: continue
         plt.plot(pd["X"],pd["F[X]"],label=pd["catalog_label"])
         print(pd["catalog_label"],pd["sum_residuals"],pd["popt"])
+        cnt += 1
+        if top is not None and cnt > top: break
+
     plt.grid(True, ls="-")
     plt.legend(bbox_to_anchor=(0,0), loc='upper left', borderaxespad=0.)
 

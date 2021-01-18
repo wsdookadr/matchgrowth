@@ -14,7 +14,8 @@ arg_parser.add_argument('--infile',  dest='infile' , action='store', required=Tr
 arg_parser.add_argument('--outfile', dest='outfile', action='store', required=False, help='PNG file to write the plot to')
 arg_parser.add_argument('--col1',    dest='col1'   , action='store', required=True, help='data column 1 from the CSV')
 arg_parser.add_argument('--col2',    dest='col2'   , action='store', required=True, help='data column 2 from the CSV')
+arg_parser.add_argument('--top',     dest='top'    , action='store', required=False, type=int, help='only print top N closest growth rates')
 args   = arg_parser.parse_args()
 
-run_from_file(args.infile,args.col1,args.col2,outfile=args.outfile)
+run_from_file(args.infile,args.col1,args.col2,outfile=args.outfile,top=args.top)
 
