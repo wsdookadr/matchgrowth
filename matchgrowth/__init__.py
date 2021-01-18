@@ -1,10 +1,9 @@
 import numpy as np
-import pandas as pd
 import sympy as sp
 import csv
 import matplotlib.pyplot as plt
 from scipy.optimize import curve_fit
-from sympy.utilities.lambdify import lambdify, implemented_function
+from sympy.utilities.lambdify import lambdify
 
 a0,a1,a2,a3,a4,a5,x,eps = sp.symbols('a_0 a_1 a_2 a_3 a_4 a_5 x \Epsilon')
 
