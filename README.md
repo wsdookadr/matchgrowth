@@ -7,7 +7,7 @@ of prescribed growth rates.
 The tool currently features most well-known [classes of growth rates](https://en.wikipedia.org/wiki/Time_complexity#Table_of_common_time_complexities)
 and works by fitting each generic growth rate function to the given data.
 
-Its primary use case is [analyzing time or space growth rates](https://en.wikipedia.org/wiki/Analysis_of_algorithms#Growth_rate_analysis_of_other_resources) of various
+Its primary use case is [estimating time or space growth rates](https://en.wikipedia.org/wiki/Analysis_of_algorithms#Growth_rate_analysis_of_other_resources) of various
 algorithms, but it can also be used on data coming from physical measurements.
 
 Note: The computed matches only give an approximation, which depending on the number of data points and the noise in the
