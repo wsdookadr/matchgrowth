@@ -46,7 +46,7 @@ Example usage:
 
     match-growth.py --infile ./tests/modif7_bench.txt --outfile r1.png --col1 N --col2 memory --top 2
 
-<img src="example.png" alt="drawing" style="width:200px;"/>
+<img src="https://raw.githubusercontent.com/wsdookadr/matchgrowth/master/example.png" alt="drawing" style="width:200px;"/>
 
 Support
 ==================
