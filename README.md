@@ -10,9 +10,6 @@ and works by fitting each generic growth rate function to the given data.
 Its primary use case is [estimating time or space growth rates](https://en.wikipedia.org/wiki/Analysis_of_algorithms#Growth_rate_analysis_of_other_resources) of various
 algorithms, but it can also be used on data coming from physical measurements.
 
-Note: The computed matches only give an approximation, which depending on the number of data points and the noise in the
-data might be completely different from the actual growth rate(that would be determined through [more rigorous analysis](https://en.wikipedia.org/wiki/Analysis_of_algorithms)).
-
 Install
 =======
 
@@ -23,8 +20,8 @@ To install from pypi:
 Usage
 =====
 
-The CLI tool expects to be passed through `--infile` a CSV file, and through `--col1` and `--col2` two column names
-present inside the CSV file. Currently the CSV file needs to have headers for all columns.
+The CLI tool expects `--infile` with a valid CSV file path, and `--col1` and `--col2` each with a column name
+present in the CSV file. Currently the CSV file needs to have headers for all columns, in the first row.
 
 The `--top` parameter allows to limit the number of matched growth rates reported.
 
@@ -32,7 +29,8 @@ The `--outfile` parameter is optional and allows to write the generated plot to 
 If the `--outfile` parameter is not passed, the default GUI from matplotlib will be used to display the plot.
 
     usage: match-growth.py [-h] --infile INFILE [--outfile OUTFILE] --col1 COL1
-                           --col2 COL2 [--top TOP]
+                           --col2 COL2 [--top TOP] [--catalog CATALOG] [--debug]
+                           [--plot PLOT_TYPE]
 
     Tool for estimating growth rates
 
@@ -43,6 +41,9 @@ If the `--outfile` parameter is not passed, the default GUI from matplotlib will
       --col1 COL1        data column 1 from the CSV
       --col2 COL2        data column 2 from the CSV
       --top TOP          only print top N closest growth rates
+      --catalog CATALOG  select the function catalog to use
+      --debug            enable debug mode
+      --plot PLOT_TYPE   plot type (normal|loglog)
 
 Example usage:
 
