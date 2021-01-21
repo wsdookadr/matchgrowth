@@ -1,8 +1,7 @@
 About
 =====
 
-This module provides a CLI tool for rough approximations according to a catalog
-of prescribed growth rates.
+This module provides a CLI tool for approximate lower bounds according to a catalog of prescribed growth rates.
 
 The tool currently features most well-known [classes of growth rates](https://en.wikipedia.org/wiki/Time_complexity#Table_of_common_time_complexities)
 and works by fitting each generic growth rate function to the given data.
