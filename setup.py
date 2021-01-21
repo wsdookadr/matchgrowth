@@ -5,7 +5,7 @@ with open("README.md", "r") as fh:
 
 setuptools.setup(
     name="matchgrowth",
-    version="0.0.8",
+    version="0.0.9",
     author="Stefan Corneliu Petrea",
     author_email="stefan@garage-coding.com",
     description="Tool for estimating growth rates",
@@ -19,6 +19,7 @@ setuptools.setup(
           'scipy>=1.5.4',
           'matplotlib>=3.3.3',
           'sympy>=1.7.1',
+          'similaritymeasures>=0.4.4',
     ],
     extras_require={
     },

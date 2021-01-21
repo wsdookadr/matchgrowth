@@ -5,6 +5,7 @@ import csv
 import matplotlib.pyplot as plt
 from scipy.optimize import curve_fit
 from sympy.utilities.lambdify import lambdify
+import similaritymeasures
 
 a0,a1,a2,a3,a4,a5,x,eps = sp.symbols('a_0 a_1 a_2 a_3 a_4 a_5 x \Epsilon')
 
@@ -188,7 +189,16 @@ def match_catalog(cli_args,X,Y,catalog):
             f = fit_func(cli_args,catalog_label,catalog,X,Y)
             fitted_py_func = f["fitted_py_func"]
             F_X = fitted_py_func(X)
-            sum_residuals = sum(abs(Y - F_X))
+
+            # sum_residuals = sum(abs(Y - F_X))
+            A=np.zeros((len(X),2))
+            B=np.zeros((len(X),2))
+            A[:,0]=X
+            A[:,1]=Y
+            B[:,0]=X
+            B[:,1]=F_X
+            similarity, dummy = similaritymeasures.dtw(A,B)
+
             plot_data_arr.append({
                 "X": X,
                 "F[X]": F_X,
@@ -197,7 +207,7 @@ def match_catalog(cli_args,X,Y,catalog):
                 "popt": f["popt"],
                 "F_str": str(f["func"]),
                 "F_sympy_str": str(f["fitted_sympy_func"]),
-                "sum_residuals": sum_residuals,
+                "similarity": similarity,
             })
         except ValueError as e:
             continue
@@ -207,7 +217,7 @@ def match_catalog(cli_args,X,Y,catalog):
     if len(plot_data_arr)==0:
         return plot_data_arr
     else:
-        return sorted(plot_data_arr, key=lambda x: x["sum_residuals"])
+        return sorted(plot_data_arr, key=lambda x: x["similarity"])
 
 def read_columns_csv(filepath,col1,col2):
     with open(filepath,'r') as f:
@@ -243,11 +253,11 @@ def run_from_file(cli_args,catalog):
 
     cnt = 1
     for pd in plot_data:
-        if pd["sum_residuals"] > max_residuals: continue
+        #if pd["similarity"] > max_residuals: continue
         if pd["F[X]"] is np.nan: continue
         try:
             if cli_args.debug==True:
-                print("{0},{1},{2},{3}".format(pd["catalog_label"],pd["sum_residuals"],pd["F_str"],pd["popt"]))
+                print("{0},{1},{2},{3}".format(pd["catalog_label"],pd["similarity"],pd["F_str"],pd["popt"]))
 
             if cli_args.plot_type == 'normal':
                 plt.plot(pd["X"],pd["F[X]"],label=pd["catalog_label"])
