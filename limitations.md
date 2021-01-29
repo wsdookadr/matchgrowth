@@ -15,4 +15,7 @@ See also:
 - https://math.stackexchange.com/a/350765/68328
 - https://stats.stackexchange.com/a/391314/90824
 - https://stats.stackexchange.com/a/9336/90824
+- https://softwareengineering.stackexchange.com/a/347750/83470
+- https://softwareengineering.stackexchange.com/a/347764/83470
+- https://softwareengineering.stackexchange.com/a/164030/83470
 
