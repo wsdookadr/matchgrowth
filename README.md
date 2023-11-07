@@ -1,6 +1,8 @@
 About
 =====
 
+WARNING: This was an experiment. The answer is in the negative. Matching resource utilization over increasing input sizes is not possible in this way. This tool should not be used for serious purposes. 
+
 This module provides a CLI tool for approximate lower bounds according to a catalog of prescribed growth rates.
 
 The tool currently features most well-known [classes of growth rates](https://en.wikipedia.org/wiki/Time_complexity#Table_of_common_time_complexities)
